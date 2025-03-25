@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:5000  # Pointing to the backend container
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true  # Use the same external network as the backend
+
