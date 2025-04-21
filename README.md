@@ -55,38 +55,6 @@ blood-group-collector/
    http://localhost:80
    ```
 
-## Features
-
-- User registration for blood donors
-- Blood group categorization and filtering
-- Contact information management
-- Location-based donor search
-- Responsive design for mobile and desktop
-
-## How It Works
-
-The application allows users to:
-1. Register as blood donors with their contact information
-2. Specify their blood type and donation availability
-3. Search for donors based on blood type and location
-4. Connect with potential donors in emergency situations
-
-The containerized architecture ensures easy deployment across different environments.
-
-## Development
-
-To set up the development environment:
-
-1. Install dependencies:
-   ```
-   npm install
-   ```
-
-2. Run in development mode:
-   ```
-   npm run dev
-   ```
-
 ## Docker Configuration
 
 The application uses Docker for containerization with the following components:
