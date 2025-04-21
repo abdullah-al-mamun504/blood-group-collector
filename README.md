@@ -73,16 +73,6 @@ The application allows users to:
 
 The containerized architecture ensures easy deployment across different environments.
 
-## API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/donors` | GET | Get all donors |
-| `/api/donors/:id` | GET | Get donor by ID |
-| `/api/donors` | POST | Register new donor |
-| `/api/donors/:id` | PUT | Update donor information |
-| `/api/donors/search` | GET | Search donors by criteria |
-
 ## Development
 
 To set up the development environment:
