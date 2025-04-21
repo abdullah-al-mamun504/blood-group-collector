@@ -1,26 +1,128 @@
-# blood-group-collector
+# Blood Group Collector
 
-This is the code structure of the application
+A web application designed to collect and manage blood group information, built with Node.js and PostgreSQL.
 
+## Project Overview
+
+The Blood Group Collector is a full-stack application that helps collect, store, and manage blood donor information. This tool can be used by blood banks, hospitals, or community organizations to maintain a database of blood donors.
+
+## Tech Stack
+
+- **Frontend**: Node.js
+- **Backend**: Node.js
+- **Database**: PostgreSQL
+- **Containerization**: Docker
+- **Web Server**: Nginx
+
+## Project Structure
+
+```
 blood-group-collector/
-├── backend
-│   ├── docker-compose.yaml
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── package-lock.json
-│   └── server.js
-├── database
-│   ├── docker-compose.yaml
-│   └── init.sql
-└── frontend
-    ├── docker-compose.yaml
-    ├── Dockerfile
-    ├── package.json
-    ├── package-lock.json
-    ├── public
-    │   └── index.html
-    └── src
-        ├── App.js
-        └── index.js
+├── backend/        # Backend Node.js server code
+├── database/       # Database schema and scripts
+├── frontend/       # Frontend Node.js application
+├── server.js       # Main server entry point
+├── docker-compose.yaml       # Docker Compose configuration
+├── Dockerfile      # Docker configuration for the application
+├── package.json    # Node.js dependencies
+├── package-lock.json  # Locked dependencies
+└── public/         # Static assets
+    └── index.html  # Main HTML entry point
+```
 
-5 directories, 14 files
+## Getting Started
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/abdullah-al-mamun504/blood-group-collector.git
+   cd blood-group-collector
+   ```
+
+2. Start the application using Docker Compose:
+   ```
+   docker-compose up -d
+   ```
+
+3. Access the application at:
+   ```
+   http://localhost:80
+   ```
+
+## Features
+
+- User registration for blood donors
+- Blood group categorization and filtering
+- Contact information management
+- Location-based donor search
+- Responsive design for mobile and desktop
+
+## How It Works
+
+The application allows users to:
+1. Register as blood donors with their contact information
+2. Specify their blood type and donation availability
+3. Search for donors based on blood type and location
+4. Connect with potential donors in emergency situations
+
+The containerized architecture ensures easy deployment across different environments.
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/donors` | GET | Get all donors |
+| `/api/donors/:id` | GET | Get donor by ID |
+| `/api/donors` | POST | Register new donor |
+| `/api/donors/:id` | PUT | Update donor information |
+| `/api/donors/search` | GET | Search donors by criteria |
+
+## Development
+
+To set up the development environment:
+
+1. Install dependencies:
+   ```
+   npm install
+   ```
+
+2. Run in development mode:
+   ```
+   npm run dev
+   ```
+
+## Docker Configuration
+
+The application uses Docker for containerization with the following components:
+- Node.js container for the application
+- PostgreSQL container for the database
+- Nginx container as a reverse proxy
+
+The Docker Compose file orchestrates these containers to work together seamlessly.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Steps to contribute:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+Abdullah Al Mamun - a.almamun504@gmail.com
+
+Project Link: [https://github.com/abdullah-al-mamun504/blood-group-collector](https://github.com/abdullah-al-mamun504/blood-group-collector)
