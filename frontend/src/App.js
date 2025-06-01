@@ -8,14 +8,14 @@ const App = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;   //env for dockerised app
 //        await axios.post('http://localhost:5000/submit', { name, bloodGroup }); // api call if running on server
 	 await axios.post( apiBaseUrl +'/submit', { name, bloodGroup }); // api call if running on docker, in docker compose backend has been called as "backend"
         fetchData();
     };
 
     const fetchData = async () => {
-        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL; //env for dockerised app
 //        const response = await axios.get('http://localhost:5000/data');
 	 const response = await axios.get(apiBaseUrl +'/data');
         setData(response.data);
