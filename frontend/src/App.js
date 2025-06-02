@@ -8,17 +8,28 @@ const App = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;   //env for dockerised app
-//        await axios.post('http://localhost:5000/submit', { name, bloodGroup }); // api call if running on server
-	 await axios.post( apiBaseUrl +'/submit', { name, bloodGroup }); // api call if running on docker, in docker compose backend has been called as "backend"
-        fetchData();
+        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
+        try {
+            console.log("Submitting to:", apiBaseUrl + "/submit");
+            await axios.post(apiBaseUrl + '/submit', { name, bloodGroup });
+            console.log("Submitted successfully");
+            fetchData();
+        } catch (err) {
+            console.error("Submit failed:", err);
+        }
     };
 
     const fetchData = async () => {
-        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL; //env for dockerised app
-//        const response = await axios.get('http://localhost:5000/data');
-	 const response = await axios.get(apiBaseUrl +'/data');
-        setData(response.data);
+        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
+        try {
+            const response = await axios.get(apiBaseUrl + '/data');
+            console.log("Fetched data:", response.data);
+            setData(response.data);
+        } catch (err) {
+            console.error("Fetch data failed:", err);
+        }
     };
 
     useEffect(() => { fetchData(); }, []);
@@ -27,8 +38,20 @@ const App = () => {
         <div>
             <h1>Blood Group Collector</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-                <input type="text" placeholder="Blood Group" value={bloodGroup} onChange={(e) => setBloodGroup(e.target.value)} required />
+                <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="Blood Group"
+                    value={bloodGroup}
+                    onChange={(e) => setBloodGroup(e.target.value)}
+                    required
+                />
                 <button type="submit">Submit</button>
             </form>
             <h2>Collected Data:</h2>
@@ -42,4 +65,3 @@ const App = () => {
 };
 
 export default App;
-
