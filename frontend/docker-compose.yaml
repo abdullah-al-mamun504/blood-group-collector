@@ -11,4 +11,3 @@ services:
 networks:
   app-network:
     external: true  # Use the same external network as the backend
-
