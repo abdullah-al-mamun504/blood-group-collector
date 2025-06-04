@@ -1,17 +1,24 @@
+version: '3.8'
+
 services:
   backend:
-    build: .
-    ports:
-      - "5000:5000"
+    build: . # Build context is the current directory (backend/)
+    restart: always
     environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=bloodDB
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      # THESE ENVIRONMENT VARIABLE NAMES MUST MATCH WHAT YOUR server.js EXPECTS
+      PORT: 5000
+      DB_USER: postgres
+      DB_HOST: db             # 'db' is the service name of the database container (from database/docker-compose.yaml)
+      DB_NAME: bloodDB
+      DB_PASS: password
+      DB_PORT: 5432
+      LOG_LEVEL: INFO
+    ports:
+      - "5000:5000" # Expose backend API port on the host
     networks:
-      - app-network
+      - app-network # Connect to the shared application network
 
 networks:
   app-network:
-    external: true  # Use the same network as the database
+    external: true # Referencing the pre-created external network
 

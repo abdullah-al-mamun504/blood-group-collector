@@ -1,8 +1,27 @@
-FROM node:18
+# Stage 1: Build
+FROM node:18 AS builder
+
 WORKDIR /app
+
+# Install dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm i
+
+# Copy source files
 COPY . .
-CMD ["node", "server.js"]
+
+# Stage 2: Run
+FROM node:18-slim
+
+WORKDIR /app
+
+# Only copy necessary files
+COPY --from=builder /app .
+
+# Install only production dependencies
+RUN npm i --omit=dev
+
 EXPOSE 5000
+
+CMD ["node", "server.js"]
 

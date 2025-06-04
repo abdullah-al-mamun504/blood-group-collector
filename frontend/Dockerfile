@@ -1,24 +1,31 @@
-# Use official Node.js image as a base
-FROM node:18
+# --- Stage 1: Build React app ---
+FROM node:18-alpine AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json first (for caching)
-COPY package*.json ./
-
 # Install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the app, including the 'public' and 'src' directories
+# Copy the rest of the code including .env
 COPY . .
 
-# Build the React app (optional if you want to serve production version)
+# Build the React app (uses .env automatically)
 RUN npm run build
 
-# Expose the port the app will run on
+# --- Stage 2: Production image ---
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install lightweight static file server
+RUN npm install -g serve
+
+# Copy the built app from the builder stage
+COPY --from=builder /app/build ./build
+
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Start the static file server
+CMD ["serve", "-s", "build", "-l", "3000"]
 

@@ -1,25 +1,26 @@
-version: '3.8'
-
 services:
   db:
-    image: postgres:15
+    image: postgres:15 # Using postgres:15 as per your last snippet
     restart: always
     environment:
       POSTGRES_DB: bloodDB
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
+      # Expose for direct host access (e.g., pgAdmin). Optional, but useful for debugging.
       - "5432:5432"
     volumes:
+      # Persist database data to a named volume
       - pgdata:/var/lib/postgresql/data
+      # Initialize database with init.sql (relative to this docker-compose.yaml)
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - app-network
+      - app-network # Connect to the shared application network
 
 networks:
   app-network:
-    external: true
+    external: true # Referencing the pre-created external network
 
 volumes:
-  pgdata:
+  pgdata: # Define the named volume for database persistence
 
